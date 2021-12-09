@@ -1,12 +1,12 @@
 body {
-    background-color: #E5ECF6;
+    background-color: #DCDCDC;
 }
 .text-display {
     flex: 1 1 0;
     margin-top: 100px;
     margin-left: 50px;
-    color: #636EFA;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: #708090;
+    font-family: 'Consolas', 'Monaco', 'Bitstream Vera Sans Mono', monospace;
 
 
 } 
@@ -40,16 +40,16 @@ body {
 }
 
 .rc-slider-handle {
-    background-color: #636EFA;
-    border:#636EFA;
+    background-color:#DCDCDC;
+    border: #DCDCDC;
 }
 
 .rc-slider-track {
-    background-color: #a0a6f5;
+    background-color: Black;
 }
 
 .rc-slider-dot-active {
-    border-color: #a0a6f5;
+    border-color: Black;
 }
 
 .footer {
@@ -57,6 +57,6 @@ body {
     display: block;
     text-align: end;
     font-size: 12px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: #636EFA;
+    color: #DCDCDC;
+    font-family: 'Consolas', 'Monaco', 'Bitstream Vera Sans Mono', monospace;
 }

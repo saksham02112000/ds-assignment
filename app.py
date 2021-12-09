@@ -6,72 +6,69 @@ from dash.dependencies import Input, Output
 
 app = dash.Dash(__name__)
 
-app.title = 'Stock Viewer'
+app.title = 'Stock Viewer'  # Title of app
 
 app.layout = html.Div([
+
     html.Div([
-        html.Div([
-            html.H1("Stock Price Trend Analysis", className='title'),
-            html.H2("Select a company to view stock"),
-            dcc.Dropdown(
-                id='stock_dropdown',
-                options=[
-                    {'label': 'Tata Motors', 'value': 'TATAMOTORS'},
-                    {'label': 'Gail', 'value': 'GAIL'},
-                    {'label': 'HCLTech', 'value': 'HCLTECH'},
-                    {'label': 'Bajaj Finserv', 'value': 'BAJAJFINSV'},
-                    {'label': 'Coal India', 'value': 'COALINDIA'},
-                    {'label': 'Hero', 'value': 'HEROMOTOCO'},
-                    {'label': 'ICICI Bank', 'value': 'ICICIBANK'},
-                    {'label': 'Kotak Mahindra Bank', 'value': 'KOTAKBANK'},
-                    {'label': 'Reliance', 'value': 'RELIANCE'},
-                    {'label': 'Wipro', 'value': 'WIPRO'},
-                ],
-                value='TATAMOTORS',
-                className='dropdown-list'
-            )
-        ],
-            className='text-display'),
-        html.Div([
-            dcc.Graph(id="stock_price-vs-date",
-                      config={
-                          'scrollZoom': True,
-                          'doubleClick': 'reset',
-                      }
-                      ),
-            html.Div([
-                dcc.RangeSlider(
-                    id='year_chosen',
-                    marks={
-                        2011: '2011',
-                        2012: '2012',
-                        2013: '2013',
-                        2014: '2014',
-                        2015: '2015',
-                        2016: '2016',
-                        2017: '2017',
-                        2018: '2018',
-                        2019: '2019',
-                        2020: '2020',
-                        2021: '2021',
-                        2022: '2022',
-                    },
-                    min=2011,
-                    max=2022,
-                    value=[2021, 2022],
-                ),
-            ])
-        ],
-            className='graph-display'),
+        html.H1("Stock Price Trend Analysis", className='title'),
+        html.H2("Select a company to view stock"),  # Header of Dropdown
+        dcc.Dropdown(  # Dropdown definition
+            id='stock_dropdown',
+            options=[
+                {'label': 'Tata Motors', 'value': 'TATAMOTORS'},
+                {'label': 'Gail', 'value': 'GAIL'},
+                {'label': 'HCLTech', 'value': 'HCLTECH'},
+                {'label': 'Bajaj Finserv', 'value': 'BAJAJFINSV'},
+                {'label': 'Coal India', 'value': 'COALINDIA'},
+                {'label': 'Hero', 'value': 'HEROMOTOCO'},
+                {'label': 'ICICI Bank', 'value': 'ICICIBANK'},
+                {'label': 'Kotak Mahindra Bank', 'value': 'KOTAKBANK'},
+                {'label': 'Reliance', 'value': 'RELIANCE'},
+                {'label': 'Wipro', 'value': 'WIPRO'},
+            ],
+            value='TATAMOTORS',
+            className='dropdown-list'
+        )
     ],
-        className='app',
-    ),
+        className='text-display'),
+    html.Div([
+        dcc.Graph(id="stock_price-vs-date",
+                  config={
+                      'scrollZoom': True,
+                      'doubleClick': 'reset',  # Zoom is reset on double CLick
+                  }
+                ),
+        html.Div([
+            dcc.RangeSlider(
+                id='year_chosen',
+                marks={
+                    2011: '2011',
+                    2012: '2012',
+                    2013: '2013',
+                    2014: '2014',
+                    2015: '2015',
+                    2016: '2016',
+                    2017: '2017',
+                    2018: '2018',
+                    2019: '2019',
+                    2020: '2020',
+                    2021: '2021',
+                    2022: '2022',
+                },
+                min=2011,  # Range between we can view our application
+                max=2022,
+                value=[2021, 2022],
+            ),
+        ])
+    ],
+        className='graph-display'),
     html.Div([
         html.Label("Made by Saksham Srivastava(101903570)", className='footer')
     ])
 ])
 
-colors = {"background": "#E5ECF6", "text": "#636EFA"}
+colors = {"background": "#DCDCDC", "text": "#708090"}  # Colour Scheme for Graph
 
 
 @app.callback(
@@ -81,7 +78,7 @@ colors = {"background": "#E5ECF6", "text": "#636EFA"}
         Input('year_chosen', 'value')
     ]
 )
-def update_figure(stock_selected, year_chosen):
+def update_figure(stock_selected, year_chosen):  # function to set required csv
     if stock_selected:
         filename = stock_selected + '.csv'
         data = pd.read_csv(filename)
@@ -97,8 +94,8 @@ def update_figure(stock_selected, year_chosen):
     fig = px.line(
         data,
         title=f'{stock_selected} Price Chart',
-        x='Date',
-        y='High',
+        x='Date',  # X Axis
+        y='High',  # Y Axis
         labels={
             'High': 'Price'
         }
